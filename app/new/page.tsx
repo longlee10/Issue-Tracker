@@ -9,6 +9,7 @@ import { useForm, Controller } from "react-hook-form";
 import SimpleMDE from "react-simplemde-editor";
 import { issueSchema } from "../validationSchema";
 import { z } from "zod";
+import ErrorMessage from "../components/ErrorMessage";
 
 type IssueForm = z.infer<typeof issueSchema>;
 
@@ -47,11 +48,7 @@ const NewIssue = () => {
             {...register("title")}
           />
         </TextField.Root>
-        {errors.title && (
-          <Text color="red" as="p">
-            {errors.title.message}
-          </Text>
-        )}
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
         <Controller
           name="description"
           control={control}
@@ -59,11 +56,7 @@ const NewIssue = () => {
             <SimpleMDE placeholder="Please describe your issue..." {...field} />
           )}
         />
-        {errors.description && (
-          <Text color="red" as="p">
-            {errors.description.message}
-          </Text>
-        )}
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button>Submit New Issue</Button>
       </form>
     </div>
