@@ -7,8 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
-import ErrorMessage from "../../components/ErrorMessage";
-import Spinner from "../../components/Spinner";
+import { ErrorMessage, Spinner } from "@/app/components";
 import { issueSchema } from "../../validationSchema";
 import dynamic from "next/dynamic";
 
