@@ -3,7 +3,7 @@ import { Table } from "@radix-ui/themes";
 import IssueStatusBadge from "../components/IssueStatusBadge";
 import IssueAction from "./IssueAction";
 import delay from "delay";
-import Link from "next/link";
+import Link from "../components/Link";
 
 const IssuePage = async () => {
   await delay(1000);
