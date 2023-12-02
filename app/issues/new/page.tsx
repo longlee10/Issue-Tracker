@@ -7,10 +7,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import SimpleMDE from "react-simplemde-editor";
-import { issueSchema } from "../validationSchema";
+import { issueSchema } from "../../validationSchema";
 import { z } from "zod";
-import ErrorMessage from "../components/ErrorMessage";
-import Spinner from "../components/Spinner";
+import ErrorMessage from "../../components/ErrorMessage";
+import Spinner from "../../components/Spinner";
 
 type IssueForm = z.infer<typeof issueSchema>;
 
