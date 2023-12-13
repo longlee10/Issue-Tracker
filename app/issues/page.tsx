@@ -51,5 +51,5 @@ export const metadata: Metadata = {
   title: "Issue Tracker - Issue List",
   description: "View all the project issues",
 };
-
+export const dynamic = "force-dynamic";
 export default IssuePage;
