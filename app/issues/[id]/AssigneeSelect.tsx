@@ -4,9 +4,11 @@ import { Issue, User } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
 const AssigneeSelect = ({ issue }: { issue: Issue }) => {
+  const router = useRouter();
   const { data: users, error, isLoading } = useUsers();
 
   if (isLoading) return <Skeleton />;
@@ -14,11 +16,14 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   if (error) return null;
 
   const assignUser = (userId: string) => {
+    const newStatus = userId ? "IN_PROGRESS" : "OPEN";
     axios
       .patch(`/api/issues/${issue.id}`, {
         assignedToUserId: userId || null,
+        status: newStatus,
       })
-      .catch(() => toast.error("Changes cannot be saved."));
+      .catch(() => toast.error("Changes cannot be saved."))
+      .then(() => router.refresh());
   };
 
   return (

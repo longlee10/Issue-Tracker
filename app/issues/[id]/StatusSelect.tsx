@@ -16,6 +16,18 @@ const StatusSelect = ({ issue }: { issue: Issue }) => {
   ];
 
   const changeStatus = (issueStatus: string) => {
+    if (issue.assignedToUserId && issueStatus === "OPEN") {
+      toast.error(
+        "Cannot change status of an assigned issue to OPEN. Please unassign first."
+      );
+      return;
+    }
+    if (!issue.assignedToUserId && issueStatus === "IN_PROGRESS") {
+      toast.error(
+        "Cannot change status of an unassigned issue. Please assign first."
+      );
+      return;
+    }
     axios
       .patch(`/api/issues/${issue.id}`, {
         status: issueStatus,
