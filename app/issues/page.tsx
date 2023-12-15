@@ -22,7 +22,7 @@ const IssuePage = async ({ searchParams }: Props) => {
     : undefined;
 
   const page = parseInt(searchParams.page) || 1;
-  const pageSize = 5;
+  const pageSize = parseInt(searchParams.pageSize) || 5;
 
   const issues = await prisma.issue.findMany({
     where,
