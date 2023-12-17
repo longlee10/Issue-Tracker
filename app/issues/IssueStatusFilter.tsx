@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
 const statuses: { label: string; value?: Status }[] = [
-  { label: "All" },
+  { label: "All Status" },
   { label: "Open", value: "OPEN" },
   { label: "In Progress", value: "IN_PROGRESS" },
   { label: "Closed", value: "CLOSED" },
@@ -23,6 +23,8 @@ const IssueStatusFilter = () => {
         if (status) params.append("status", status);
         if (searchParams.get("orderBy"))
           params.append("orderBy", searchParams.get("orderBy")!);
+        if (searchParams.get("sortOrder"))
+          params.append("sortOrder", searchParams.get("sortOrder")!);
         if (searchParams.get("pageSize"))
           params.append("pageSize", searchParams.get("pageSize")!);
 

@@ -1,4 +1,4 @@
-import { ArrowUpIcon } from "@radix-ui/react-icons";
+import { ArrowDownIcon, ArrowUpIcon } from "@radix-ui/react-icons";
 import { Table } from "@radix-ui/themes";
 import Link from "next/link";
 import { IssueStatusBadge } from "../components";
@@ -8,6 +8,7 @@ import { Issue, Status } from "@prisma/client";
 export interface IssueQuery {
   status: Status;
   orderBy: keyof Issue;
+  sortOrder: "asc" | "desc";
   page: string;
   pageSize: string;
 }
@@ -32,9 +33,14 @@ const IssueTable = ({ searchParams, issues }: Props) => {
               >
                 {column.label}
               </NextLink>
-              {searchParams.orderBy === column.value && (
-                <ArrowUpIcon className="inline" />
-              )}
+              {searchParams.orderBy === column.value &&
+                searchParams.sortOrder === "asc" && (
+                  <ArrowUpIcon className="inline" />
+                )}
+              {searchParams.orderBy === column.value &&
+                searchParams.sortOrder === "desc" && (
+                  <ArrowDownIcon className="inline" />
+                )}
             </Table.ColumnHeaderCell>
           ))}
         </Table.Row>

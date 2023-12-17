@@ -1,24 +1,23 @@
 "use client";
 import { Select } from "@radix-ui/themes";
 import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
 
-const PageSizeSelect = () => {
+const SortOrderSelect = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   return (
     <Select.Root
-      defaultValue="5"
-      onValueChange={(pageSize) => {
+      defaultValue={searchParams.get("sortOrder") || "asc"}
+      onValueChange={(sortOrder) => {
         const params = new URLSearchParams();
-        params.append("pageSize", pageSize);
+        params.append("sortOrder", sortOrder);
         if (searchParams.get("status"))
           params.append("status", searchParams.get("status")!);
+        if (searchParams.get("pageSize"))
+          params.append("pageSize", searchParams.get("pageSize")!);
         if (searchParams.get("orderBy"))
           params.append("orderBy", searchParams.get("orderBy")!);
-        if (searchParams.get("sortOrder"))
-          params.append("sortOrder", searchParams.get("sortOrder")!);
         const query = params.size ? `?${params.toString()}` : "";
         router.push(`/issues/${query}`);
       }}
@@ -26,14 +25,12 @@ const PageSizeSelect = () => {
       <Select.Trigger />
       <Select.Content>
         <Select.Group>
-          <Select.Label>Page Size</Select.Label>
-          <Select.Item value="5">5</Select.Item>
-          <Select.Item value="10">10</Select.Item>
-          <Select.Item value="15">15</Select.Item>
+          <Select.Item value="asc">Sort by: Ascending</Select.Item>
+          <Select.Item value="desc">Sort by: Descending</Select.Item>
         </Select.Group>
       </Select.Content>
     </Select.Root>
   );
 };
 
-export default PageSizeSelect;
+export default SortOrderSelect;

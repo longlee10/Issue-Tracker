@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import IssueStatusFilter from "./IssueStatusFilter";
 import PageSizeSelect from "./PageSizeSelect";
+import SortOrderSelect from "./SortOrderSelect";
 
 const IssueAction = () => {
   return (
@@ -10,6 +11,7 @@ const IssueAction = () => {
       <Flex gap="3">
         <IssueStatusFilter />
         <PageSizeSelect />
+        <SortOrderSelect />
       </Flex>
       <Button>
         <Link href="/issues/new">Create Issue</Link>
